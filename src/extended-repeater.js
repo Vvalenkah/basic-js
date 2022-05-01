@@ -15,28 +15,28 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater( /* str, options */ ) {
-    let str2 = '';
-    const options = {
-        repeatTimes: Number(this.repeatTimes) || 1,
-        separator: String(this.separator) || '+',
-        addition: String(this.addition) || '',
-        additionRepeatTimes: Number(this.additionRepeatTimes) || 1,
-        additionSeparator: String(this.additionSeparator) || '|',
-        // str2 = `${str} + ${addition}`.repeat(repeatTimes)
-        // str2.split()
-    }
+function repeater(str, options) {
+    let repeatTimes = Number(options.repeatTimes || 1);
+    let separator = String(options.separator || '+');
+
+    let addition = String(options.addition || '');
+
+    if (addition == false) {
+        addition = 'false';
+    };
+    let additionRepeatTimes = Number(options.additionRepeatTimes || 1);
+    let additionSeparator = String(options.additionSeparator || '|');
     let additionArray = [];
-    for (let i = 0; i < options.additionRepeatTimes; i++) {
-        options.additionCount.push(options.addition);
+    for (let i = 0; i < additionRepeatTimes; i++) {
+        additionArray.push(String(addition));
     }
-    let additionWithSeps = additionArray.join(options.additionSeparator);
+    let additionWithSeps = additionArray.join(additionSeparator);
     let strWithAddition = String(str) + String(additionWithSeps);
-    strArray = [];
+    let strArray = [];
     for (let i = 0; i < repeatTimes; i++) {
         strArray.push(strWithAddition);
     }
-    strArray = strArray.join(options.separator);
+    strArray = strArray.join(separator);
     return strArray;
 
 }
